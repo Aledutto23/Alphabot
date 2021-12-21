@@ -3,7 +3,7 @@ import AlphaBot
 import sqlite3
 
 s = sck.socket(sck.AF_INET, sck.SOCK_STREAM)
-s.bind(('0.0.0.0', 24000))
+s.bind(('0.0.0.0', 11000))
 s.listen()
 conn, addr = s.accept()
 bot = AlphaBot.AlphaBot()                                         #instanza classe AlphaBot
@@ -30,5 +30,4 @@ while True:
             bot.time_left(lista_comandi[cont+1])
             print("sinistra")
 s.close()                                                         #chiusura socket e cursore
-cur.close()
-
+con.close()
