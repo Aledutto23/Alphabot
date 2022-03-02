@@ -24,4 +24,4 @@ Within our project we also used programs such as putty and WinSCP to transfer th
 
 # ER diagram
 
-<img src="alphabot_http/schema-er.png" width=200>
+<img src="alphabot_http/schema-er.png" width=800>
