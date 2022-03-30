@@ -14,7 +14,7 @@ for _ in range(10):
 
 def validate(username, password):
     completion = False
-    con = sqlite3.connect('C:/Users/crice/Desktop/alphabot_http/db.db')
+    con = sqlite3.connect('./db.db')
     cur = con.cursor()
     cur.execute("SELECT * FROM USERS")
     rows = cur.fetchall()
@@ -40,7 +40,7 @@ def login():
         if completion ==False:
             error = 'Invalid Credentials. Please try again.'
         else:
-            con = sqlite3.connect('C:/Users/crice/Desktop/alphabot_http/db.db')
+            con = sqlite3.connect('./db.db')
             cur = con.cursor()
             cur.execute(f"INSERT INTO login (id_utente, data, ora, username, cookie) VALUES ('{token}', '{date.today()}', '{datetime.now()}', '{username}', '{cookie}');")
             con.commit()
@@ -54,7 +54,7 @@ def login():
 def main():
     #bot = AlphaBot.AlphaBot()  
     if request.method == 'POST':
-        con = sqlite3.connect('C:/Users/crice/Desktop/alphabot_http/db.db')
+        con = sqlite3.connect('./db.db')
         cur = con.cursor()
         cont = -1
 
@@ -110,4 +110,4 @@ def main():
 
 
 if __name__== "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='localhost') #, host='192.168.0.129'
