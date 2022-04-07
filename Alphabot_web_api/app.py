@@ -34,7 +34,7 @@ def generale():
                 result = {"left": 0, "right": 0} #no ostacoli
                 print("no ostacoli ")
                 return jsonify(result)
-                #129
+
             elif((DL_status == 1) and (DR_status == 0)): #1 non c'è, 0 c'è
                 result = {"left": 0, "right": 1} #ostacolo sulla destra
                 print("sulla destra")
@@ -42,12 +42,12 @@ def generale():
                 
             elif((DL_status == 0) and (DR_status == 1)):
                 result = {"left": 1, "right": 0}  #ostacolo sulla sinistra
-                print("sulla sinistra")
+                print("sulla sinistra ")
                 return jsonify(result)
 
             elif((DL_status == 0) and (DR_status == 0)):
                 result = {"left": 1, "right": 1}  #ostacolo su entrambi i sensori
-                print("su entrambi")
+                print("su entrambi ")
                 return jsonify(result)
 
     except KeyboardInterrupt:
@@ -59,11 +59,11 @@ def left():
     try:
         if 'pwm' in request.args and 'time' in request.args:
             pwm = float(request.args['pwm'])
-            time = int(request.args['time'])
+            time = float(request.args['time'])
             bot.time_left(time, pwm)
             return "1"
         else:
-            return "mancano dei parametri nell'url"  #1 c'è errore
+            return "0"  #1 c'è errore
     except:
         return "0"
     
@@ -72,11 +72,11 @@ def right():
     try:
         if 'pwm' in request.args and 'time' in request.args:
             pwm = float(request.args['pwm'])
-            time = int(request.args['time'])
+            time = float(request.args['time'])
             bot.time_right(time, pwm)
             return "1"
         else:
-            return "mancano dei parametri nell'url"
+            return "0"
     except:
         return "0"
 
@@ -86,11 +86,24 @@ def both():
         if 'pwmL' in request.args and 'time' in request.args and 'pwmR' in request.args :
             pwmL = float(request.args['pwmL'])
             pwmR = float(request.args['pwmR'])
-            time = int(request.args['time'])
+            time = float(request.args['time'])
             bot.time_forward(time, pwmL, pwmR)
             return "1"
         else:
-            return "mancano dei parametri nell'url"
+            return "0"
+    except:
+        return "0"
+
+@app.route('/api/v1/motors/back', methods =['GET', 'POST'])
+def back():
+    try:
+        if 'pwm' in request.args and 'time' in request.args:
+            pwm = float(request.args['pwm'])
+            time = float(request.args['time'])
+            bot.time_backward(time, pwm)
+            return "1"
+        else:
+            return "0"
     except:
         return "0"
 
